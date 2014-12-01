@@ -1,0 +1,67 @@
+<!DOCTYPE HTML>
+<html>
+		<!-- Brandon Oh
+		September 9, 2014
+		Introduction to Programming
+		Project 2 - Text Based Game-->
+	<head>
+		<title>
+			The Lab
+		</title>
+		<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+	<script type = "text/javascript" src = "Location.js"></script>
+	<script type = "text/javascript" src = "Commands.js"></script>
+	<script type = "text/javascript" src = "Story.js"></script>
+	</head>
+	<body onload="init();">
+		<h3>
+			The Lab
+		</h3>
+		<textarea rows="18" cols ="50" id="taMain">
+</textarea>
+
+		<textarea rows="2" cols = "8" id="pointScreen"></textarea>
+		<img src="Map.jpg" alt="Map View" style="width:420px;height:270px">
+		
+		<br>
+		
+		<input type="text" 
+               id = "txtCommand"
+               name="txtCommand">
+               
+        <input type="button"
+               value="Go" 
+               onclick="btnGo_click();" />
+              
+		<br>
+		
+		<input 	type="button"
+				id="myNorthBtn" 
+				onclick = "myNorthFunction()" 
+				value="North" >
+		
+		<input 	type="button" 
+				disabled 
+				id="mySouthBtn" 
+				onclick = "mySouthFunction()" 
+				value="South">
+		
+		<input 	type="button" 
+				disabled 
+				id="myEastBtn" 
+				onclick = "myEastFunction()" 
+				value="East">
+		
+		<input 	type="button" 
+				id="myWestBtn" 
+				onclick = "myWestFunction()" 
+				value="West">
+		<br>
+		<br>
+		<address>
+			<a href="mailto:brandonoh2938@gmail.com">
+			Send me an email by clicking me.
+			</a>
+		</address>
+	</body>	
+</html>
