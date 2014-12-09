@@ -9,9 +9,9 @@
 			The Lab
 		</title>
 		<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-	<script type = "text/javascript" src = "Location.js"></script>
-	<script type = "text/javascript" src = "Commands.js"></script>
 	<script type = "text/javascript" src = "Story.js"></script>
+	<script type = "text/javascript" src = "Commands.js"></script>
+	<script type = "text/javascript" src = "PuzzleAndInv.js"></script>
 	</head>
 	<body onload="init();">
 		<h3>
@@ -37,24 +37,24 @@
 		
 		<input 	type="button"
 				id="myNorthBtn" 
-				onclick = "myNorthFunction()" 
+				onclick = "btnAction(north)" 
 				value="North" >
 		
 		<input 	type="button" 
 				disabled 
 				id="mySouthBtn" 
-				onclick = "mySouthFunction()" 
+				onclick = "btnAction(south)" 
 				value="South">
 		
 		<input 	type="button" 
 				disabled 
 				id="myEastBtn" 
-				onclick = "myEastFunction()" 
+				onclick = "btnAction(east)" 
 				value="East">
 		
 		<input 	type="button" 
 				id="myWestBtn" 
-				onclick = "myWestFunction()" 
+				onclick = "btnAction(west)" 
 				value="West">
 		<br>
 		<br>

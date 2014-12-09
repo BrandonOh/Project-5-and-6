@@ -1,42 +1,93 @@
-var painkiller = 0
-var memo = 0
-var flashlight = 0
-var shotgunRounds = 0
-var knowledge = 0
-var invCheck = 0
-var msg = ""
+var roomLoc = 0
+var nextRoomLoc = 0
+var north = 0
+var south = 1
+var east = 2
+var west = 3
+var totalPoints = 0
 
+var rooms = new Array ( roomLoc_0,
+					    roomLoc_1,
+					    roomLoc_2,
+					    roomLoc_3,
+					    roomLoc_4,
+					    roomLoc_5,
+					    roomLoc_6,
+					    roomLoc_7,
+					    roomLoc_8,
+					    roomLoc_9);
+						   
+var dir = [ // N   S   E   W 
+	/* 0 */ [  1, -1, -1,  5],
+	/* 1 */ [  3,  0,  2,  4],
+	/* 2 */ [ -1,  8,  7,  1],
+	/* 3 */ [ -1,  1,  9,  6], 
+	/* 4 */ [ -1, -1,  1, -1],
+	/* 5 */ [ -1, -1,  0, -1],
+	/* 6 */ [ -1, -1,  3, -1],
+	/* 7 */ [ -1, -1, -1,  2],
+	/* 8 */ [  2, -1, -1, -1], 
+	/* 9 */ [ -1, -1, -1,  3]
+		  ];
+		  
+var disableButton = new Array("myNorthBtn","mySouthBtn","myEastBtn","myWestBtn")
+		  
 function btnGo_click(){
-	var input = document.getElementById("txtCommand").value;
-	input = input.toLowerCase();
+	txtCommand.value = txtCommand.value.toLowerCase();
+	btnAction(txtCommand.value)
+}
+
+function btnAction(input){
+	var targetPointTextArea = document.getElementById("pointScreen");
 	if (input === "n" || input === "north"){
-		myNorthFunction()
+		input = north
 	}else if (input === "s" || input === "south"){
-		mySouthFunction()
+		input = south
 	}else if (input === "e" || input === "east"){
-		myEastFunction()
+		input = east
 	}else if (input === "w" || input === "west"){
-		myWestFunction()
+		input = west
 	}else if (input === "help"){
 		help()
 	}else if (input === "read memo"){
 		read()
 	}else if (input === "examine"){
 		examine()
-	}else if (input === "inventory"){
+	}else if (input === "inventory" || input === "i"){
 		inventory()
-	}else if (input === "take memo" || input === "take medicine"){
+	}else if (input === "take"){
 		take()
-	}else if (input === "use painkiller"){
+	}else if (input === "use medicine"){
 		takePainkiller()
 	}else if (input === "use computer"){
 		computer()
 	}else{
 		msg = "I do not understand that action " + input + ". Please type help for possible actions."
 	}
-	textMessage(msg)
-	document.getElementById("txtCommand").value = ""
-	msg = ""
+	nextRoomLoc = dir[roomLoc][input]
+	
+	if (input <= 3){
+		if (nextRoomLoc >= 0){
+			textMessage(rooms[nextRoomLoc])
+			roomLoc = nextRoomLoc
+			if (rooms[nextRoomLoc].points === false){
+				totalPoints += 5
+				targetPointTextArea.value = "total points: " + totalPoints
+				rooms[nextRoomLoc].points = true
+			}
+			for (var i = 0; i < disableButton.length; i++) {
+			var btnDisable = 0;
+			btnDisable = dir[roomLoc][i];
+			if (btnDisable === -1) {
+			  document.getElementById(disableButton[i]).disabled = true;
+			}else{
+				document.getElementById(disableButton[i]).disabled = false;
+			}
+		}
+	} else if (nextRoomLoc === -1){
+			textMessage("There is no where to go.")
+	}
+	}
 }
 
 function computer(){
@@ -67,7 +118,7 @@ function take(){
 		}
 	}else if (roomLoc === 5){
 		if (painkiller === 0){
-			msg = "You take the medicine to find they are painkillers."
+			msg = "You take the medicine."
 			painkiller = 1 
 		}else if(painkiller === 1){
 			msg = "You check the medicine cabinet but find nothing."
@@ -96,6 +147,7 @@ function examine(){
 	}else{
 		msg = "The room shows no interest."
 	}
+	textMessage(msg)
 }
 
 function inventory(){
@@ -140,6 +192,22 @@ function read(){
 	}
 }
 
+function textMessage(msg){
+	var msg = msg
+	var targetMainTextArea = document.getElementById("taMain");
+	targetMainTextArea.value = msg + "\n\n" + targetMainTextArea.value
+}	
+
 function help(){
-		msg = "Commands that are valid are:\n\nTo go South = s or south\n\nTo go North = n or north\n\nTo go East = e or east\n\nTo go West = w or west\n\nTo examine the room you are in = examine\n\nTo take objects = take ______\n\nTo read something in your inventory = read _____\n\nTo use objects = use _____\n\nCommands are not case sensitive."	
+		textMessage("Commands that are valid are:\n" +
+		      "To go South type: s or south\n" +
+		      "To go North type: n or north\n" +
+			  "To go East type: e or east\n" +
+			  "To go West type: w or west\n" +
+			  "To examine the room you are in type: examine\n" +
+			  "To take objects in a room type: take\n" +
+			  "To read something in your inventory type: read _____\n" +
+			  "To use objects = use _____\n" +
+			  "To check inventory type: inventory or i\n" +
+			  "Commands are not case sensitive.")	
 }

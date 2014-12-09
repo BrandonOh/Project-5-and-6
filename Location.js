@@ -1,15 +1,5 @@
-var roomLoc = 0
-var room1_Points = 0
-var room2_Points = 0
-var room3_Points = 0
-var room4_Points = 0
-var room5_Points = 0
-var room6_Points = 0
-var room7_Points = 0
-var room8_Points = 0
-var room9_Points = 0
 var pain = 0
-var totalPoints = 0
+//var totalPoints = 0
 var metalDoorOpen = 0
 
 function myNorthFunction(){
