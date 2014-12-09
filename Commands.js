@@ -5,6 +5,7 @@ var south = 1
 var east = 2
 var west = 3
 var totalPoints = 0
+var pain = 0
 
 var rooms = new Array ( roomLoc_0,
 					    roomLoc_1,
@@ -39,13 +40,13 @@ function btnGo_click(){
 
 function btnAction(input){
 	var targetPointTextArea = document.getElementById("pointScreen");
-	if (input === "n" || input === "north"){
+	if (input === "n" || input === "north" || input === 0){
 		input = north
-	}else if (input === "s" || input === "south"){
+	}else if (input === "s" || input === "south" || input === 1){
 		input = south
-	}else if (input === "e" || input === "east"){
+	}else if (input === "e" || input === "east" || input === 2){
 		input = east
-	}else if (input === "w" || input === "west"){
+	}else if (input === "w" || input === "west" || input === 3){
 		input = west
 	}else if (input === "help"){
 		help()
@@ -62,31 +63,35 @@ function btnAction(input){
 	}else if (input === "use computer"){
 		computer()
 	}else{
-		msg = "I do not understand that action " + input + ". Please type help for possible actions."
+		textMessage("I do not understand that action " + input + ". Please type help for possible actions.")
 	}
+	
 	nextRoomLoc = dir[roomLoc][input]
 	
 	if (input <= 3){
-		if (nextRoomLoc >= 0){
+		if (nextRoomLoc >= 0 && pain <= 4){
 			textMessage(rooms[nextRoomLoc])
 			roomLoc = nextRoomLoc
+			painMeter()
 			if (rooms[nextRoomLoc].points === false){
 				totalPoints += 5
 				targetPointTextArea.value = "total points: " + totalPoints
 				rooms[nextRoomLoc].points = true
 			}
 			for (var i = 0; i < disableButton.length; i++) {
-			var btnDisable = 0;
-			btnDisable = dir[roomLoc][i];
-			if (btnDisable === -1) {
-			  document.getElementById(disableButton[i]).disabled = true;
-			}else{
-				document.getElementById(disableButton[i]).disabled = false;
+				var btnDisable = 0;
+				btnDisable = dir[roomLoc][i];
+				if (btnDisable === -1) {
+			 		document.getElementById(disableButton[i]).disabled = true;
+				}else{
+					document.getElementById(disableButton[i]).disabled = false;
+				}
 			}
-		}
-	} else if (nextRoomLoc === -1){
+		} else if (nextRoomLoc === -1){
 			textMessage("There is no where to go.")
-	}
+		} else if (pain === 5){
+			painMeter()
+		}
 	}
 }
 
