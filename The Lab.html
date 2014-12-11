@@ -12,16 +12,19 @@
 	<script type = "text/javascript" src = "Story.js"></script>
 	<script type = "text/javascript" src = "Commands.js"></script>
 	<script type = "text/javascript" src = "PuzzleAndInv.js"></script>
+	<script type = "text/javascript" src = "Map.js"></script>
 	</head>
 	<body onload="init();">
 		<h3>
 			The Lab
 		</h3>
-		<textarea rows="18" cols ="50" id="taMain">
+		<textarea rows="31" cols ="50" id="taMain">
 </textarea>
 
 		<textarea rows="2" cols = "8" id="pointScreen"></textarea>
-		<img src="Map.jpg" alt="Map View" style="width:420px;height:270px">
+		
+		<canvas id="map" width="400" height="400" style="border:2px solid;"></canvas>
+    	<input type="button" value="clear" id="clear button" size="23" onclick="erase()">
 		
 		<br>
 		
