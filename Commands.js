@@ -29,8 +29,8 @@ var dir = [ // N   S   E   W
 	/* 6 */ [ -1, -1,  3, -1],
 	/* 7 */ [ -1, -1, -1,  2],
 	/* 8 */ [  2, -1, -1, -1], 
-	/* 9 */ [ -1, -1, -1,  3],
-	/* 10*/ [ -1, -1,  10, 9]
+	/* 9 */ [ -1, -1,  10, 3],
+	/* 10*/ [ -1, -1, -1,  9]
 		  ];
 		  
 var disableButton = new Array("myNorthBtn","mySouthBtn","myEastBtn","myWestBtn")
@@ -61,9 +61,13 @@ function btnAction(input){
 	}else if (input === "take"){
 		take()
 	}else if (input === "use medicine"){
-		takePainkiller()
+		useMedicine()
 	}else if (input === "use computer"){
 		computer()
+	}else if (input === "use key"){
+		electricalBreaker()
+	}else if (input === "use elevator"){
+		elevator()
 	}else{
 		textMessage("I do not understand that action " + input + ". Please type help for possible actions.")
 	}
